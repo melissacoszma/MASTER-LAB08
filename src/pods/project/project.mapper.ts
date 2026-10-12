@@ -19,7 +19,7 @@ export const mapProjectFromApiToVm = (
   return Boolean(project)
     ? {
         ...project,
-        employees: mapEmployeeSummaryListFromApiToVm(project.employees),
+        employees: mapEmployeeSummaryListFromApiToVm(project.employees), // si project existe debe devolver una copia con los empleados mapeados
       }
-    : viewModel.createEmptyProject();
+    : viewModel.createEmptyProject();                                    // si no existe debe devolver un proyecto vacío 
 };
