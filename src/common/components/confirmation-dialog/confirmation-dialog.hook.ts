@@ -8,11 +8,11 @@ export const useConfirmationDialog = () => {
   return {
     isOpen,
     itemToDelete,
-    onAccept: () => {
+    onAccept: () => { // después de abrir con un item el lookup vuelve a dejarlo vacío
       setItemToDelete(createEmptyLookup());
     },
-    onClose: () => setIsOpen(false),
-    onOpenDialog: (item: Lookup) => {
+    onClose: () => setIsOpen(false), // después de haberlo abierto se marca como cerrado
+    onOpenDialog: (item: Lookup) => { // se abre con un item y lo guarda
       setIsOpen(true);
       setItemToDelete(item);
     },
