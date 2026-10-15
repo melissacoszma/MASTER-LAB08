@@ -111,7 +111,7 @@ describe('common/components/confirmation-dialog/ConfirmationDialogComponent', ()
     </ConfirmationDialogComponent>
     );
 
-    // ACT: pulsa el botón de cerrar 
+    // ACT: pulsa el botón de abrir 
     fireEvent.click(screen.getByText(props.labels.acceptButton));
 
     // ASSERT: comprueba que se llamó 1 vez a ambos

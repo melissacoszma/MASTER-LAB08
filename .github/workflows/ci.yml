@@ -1,0 +1,37 @@
+# Nombre del workflow
+name: CI
+
+# CUÁNDO se ejecuta: en cada push a cualquier rama y en cada pull request
+on:
+  push:
+  pull_request:
+
+# QUÉ se ejecuta: una lista de trabajos
+jobs:
+  unit-tests:
+    # La máquina de GitHub donde se ejecuta: un Linux (Ubuntu) recién creado
+    runs-on: ubuntu-latest
+
+    # Los pasos, en orden, igual que los harías tú a mano
+    steps:
+      # 1) Descarga el código de tu repo en esa máquina
+      - name: Descargar el código
+        uses: actions/checkout@v5
+
+      # 2) Instala Node.js (y guarda en caché las descargas de npm para ir más rápido)
+      - name: Instalar Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      # 3) Instala las dependencias exactas de package-lock.json
+      #    (npm ci es como npm install, pero pensado para CI: más estricto y reproducible)
+      - name: Instalar dependencias
+        run: npm ci
+
+      # 4) Ejecuta los tests UNA vez y termina.
+      #    "-- --run" le pasa a Vitest la opción --run, para que no se quede
+      #    en modo watch esperando cambios como hace en tu ordenador
+      - name: Ejecutar tests unitarios
+        run: npm test -- --run
